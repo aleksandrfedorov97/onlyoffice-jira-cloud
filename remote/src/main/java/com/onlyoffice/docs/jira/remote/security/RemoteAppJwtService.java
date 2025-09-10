@@ -63,13 +63,23 @@ public class RemoteAppJwtService {
 
     public Jwt encode(final String subject, final String audience, final long lifeTimeInMinutes,
                       final Map<String, Object> context) {
+        return encode(
+                subject,
+                audience,
+                Instant.now(),
+                TimeUnit.MINUTES.toSeconds(lifeTimeInMinutes),
+                context
+        );
+    }
+
+    public Jwt encode(final String subject, final String audience, final Instant now, final long lifeTimeInSeconds,
+                      final Map<String, Object> context) {
         JwsHeader header = JwsHeader
                 .with(MacAlgorithm.HS256)
                 .type("JWT")
                 .build();
 
-        Instant now = Instant.now();
-        Instant expiry = now.plusSeconds(TimeUnit.MINUTES.toSeconds(lifeTimeInMinutes));
+        Instant expiry = now.plusSeconds(lifeTimeInSeconds);
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .subject(subject)
