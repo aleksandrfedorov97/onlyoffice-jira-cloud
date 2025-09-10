@@ -21,12 +21,12 @@ package com.onlyoffice.docs.jira.remote.web.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onlyoffice.docs.jira.remote.aop.CurrentFitContext;
+import com.onlyoffice.docs.jira.remote.aop.CurrentProduct;
 import com.onlyoffice.docs.jira.remote.api.Context;
 import com.onlyoffice.docs.jira.remote.api.FitContext;
 import com.onlyoffice.docs.jira.remote.api.JiraContext;
 import com.onlyoffice.docs.jira.remote.api.Product;
 import com.onlyoffice.docs.jira.remote.api.XForgeTokenType;
-import com.onlyoffice.docs.jira.remote.configuration.ForgeProperties;
 import com.onlyoffice.docs.jira.remote.security.RemoteAppJwtService;
 import com.onlyoffice.docs.jira.remote.security.SecurityUtils;
 import com.onlyoffice.docs.jira.remote.security.XForgeTokenRepository;
@@ -57,7 +57,6 @@ public class RemoteAuthorizationController {
     @Value("${app.security.ttl.default}")
     private long ttlDefault;
 
-    private final ForgeProperties forgeProperties;
     private final RemoteAppJwtService remoteAppJwtService;
     private final XForgeTokenRepository xForgeTokenRepository;
 
@@ -67,11 +66,11 @@ public class RemoteAuthorizationController {
     public ResponseEntity<AuthorizationResponse> getAuthorization(
             final @AuthenticationPrincipal Jwt principal,
             final @CurrentFitContext FitContext fitContext,
+            final @CurrentProduct Product product,
             final @RequestHeader("x-forge-oauth-system") String xForgeSystemToken,
             final @RequestHeader("x-forge-oauth-user") String xForgeUserToken,
             final @Valid @RequestBody AuthorizationRequest request
     ) throws ParseException {
-        Product product = forgeProperties.getProductByAppId(principal.getAudience().getFirst());
         String accountId = principal.getClaimAsString("principal");
 
         Context remoteAppTokenContext = switch (product) {

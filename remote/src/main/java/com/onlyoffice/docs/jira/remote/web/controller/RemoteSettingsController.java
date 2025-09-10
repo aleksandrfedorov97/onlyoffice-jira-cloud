@@ -19,9 +19,9 @@
 package com.onlyoffice.docs.jira.remote.web.controller;
 
 import com.onlyoffice.docs.jira.remote.aop.CurrentFitContext;
+import com.onlyoffice.docs.jira.remote.aop.CurrentProduct;
 import com.onlyoffice.docs.jira.remote.api.FitContext;
 import com.onlyoffice.docs.jira.remote.api.Product;
-import com.onlyoffice.docs.jira.remote.configuration.ForgeProperties;
 import com.onlyoffice.docs.jira.remote.entity.DemoServerConnection;
 import com.onlyoffice.docs.jira.remote.entity.DemoServerConnectionId;
 import com.onlyoffice.docs.jira.remote.repository.DemoServerConnectionRepository;
@@ -48,16 +48,13 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/remote/settings")
 public class RemoteSettingsController {
-    private final ForgeProperties forgeProperties;
     private final DemoServerConnectionRepository demoServerConnectionRepository;
 
     @GetMapping
     public ResponseEntity<SettingsResponse> getSettings(
-            final @AuthenticationPrincipal Jwt principal,
-            final @CurrentFitContext FitContext fitContext
+            final @CurrentFitContext FitContext fitContext,
+            final @CurrentProduct Product product
     ) throws ParseException {
-        Product product = forgeProperties.getProductByAppId(principal.getAudience().getFirst());
-
         DemoServerConnectionId demoServerConnectionId = DemoServerConnectionId.builder()
                 .cloudId(fitContext.cloudId())
                 .product(product)
@@ -92,10 +89,9 @@ public class RemoteSettingsController {
     @PostMapping
     public ResponseEntity<SettingsResponse> saveSettings(
             final @AuthenticationPrincipal Jwt principal,
-            final @CurrentFitContext FitContext fitContext
+            final @CurrentFitContext FitContext fitContext,
+            final @CurrentProduct Product product
     ) throws ParseException {
-        Product product = forgeProperties.getProductByAppId(principal.getAudience().getFirst());
-
         DemoServerConnectionId demoServerConnectionId = DemoServerConnectionId.builder()
                 .cloudId(fitContext.cloudId())
                 .product(product)

@@ -19,6 +19,7 @@
 package com.onlyoffice.docs.jira.remote.configuration;
 
 import com.onlyoffice.docs.jira.remote.web.resolver.FitContextArgumentResolver;
+import com.onlyoffice.docs.jira.remote.web.resolver.ProductArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -31,9 +32,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WebConfiguration implements WebMvcConfigurer {
     private final FitContextArgumentResolver fitContextArgumentResolver;
+    private final ProductArgumentResolver productArgumentResolver;
 
     @Override
     public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(fitContextArgumentResolver);
+        resolvers.addAll(List.of(
+                fitContextArgumentResolver,
+                productArgumentResolver
+        ));
     }
 }

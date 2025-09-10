@@ -19,11 +19,11 @@
 package com.onlyoffice.docs.jira.remote.web.controller;
 
 import com.onlyoffice.docs.jira.remote.aop.CurrentFitContext;
+import com.onlyoffice.docs.jira.remote.aop.CurrentProduct;
 import com.onlyoffice.docs.jira.remote.api.FitContext;
 import com.onlyoffice.docs.jira.remote.api.Product;
 import com.onlyoffice.docs.jira.remote.client.jira.JiraClient;
 import com.onlyoffice.docs.jira.remote.client.jira.dto.JiraAttachment;
-import com.onlyoffice.docs.jira.remote.configuration.ForgeProperties;
 import com.onlyoffice.docs.jira.remote.web.dto.create.CreateRequest;
 import com.onlyoffice.docs.jira.remote.web.dto.create.CreateResponse;
 import com.onlyoffice.manager.document.DocumentManager;
@@ -35,8 +35,6 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.core.io.buffer.DefaultDataBufferFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -53,18 +51,16 @@ import java.util.Locale;
 @RequestMapping("/api/v1/remote/create")
 @RequiredArgsConstructor
 public class RemoteCreateController {
-    private final ForgeProperties forgeProperties;
     private final DocumentManager documentManager;
     private final JiraClient jiraClient;
 
     @PostMapping
     public ResponseEntity<CreateResponse> createAttachment(
-            final @AuthenticationPrincipal Jwt principal,
             final @CurrentFitContext FitContext fitContext,
+            final @CurrentProduct Product product,
             final @RequestHeader("x-forge-oauth-user") String xForgeUserToken,
             final @Valid @RequestBody CreateRequest request
     ) {
-        Product product = forgeProperties.getProductByAppId(principal.getAudience().getFirst());
         String issueId = request.getParentId();
         String title = request.getTitle();
         DocumentType documentType = request.getDocumentType();
