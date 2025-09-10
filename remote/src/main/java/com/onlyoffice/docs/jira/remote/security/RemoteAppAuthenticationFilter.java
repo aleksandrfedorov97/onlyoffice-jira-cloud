@@ -72,13 +72,15 @@ public class RemoteAppAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
                                     final FilterChain filterChain) throws ServletException, IOException {
         String token = request.getParameter("token");
-        String contextPath = request.getServletPath();
+        String contextPath = request.getContextPath();
+        String requestURI = request.getRequestURI();
+        String path = requestURI.substring(contextPath.length());
 
         if (Objects.isNull(token) || token.isEmpty()) {
             filterChain.doFilter(request, response);
         } else {
             try {
-                Jwt jwt = this.getJwt(token, contextPath);
+                Jwt jwt = this.getJwt(token, path);
 
                 JwtAuthenticationToken jwtAuthenticationToken = new JwtAuthenticationToken(
                         jwt,
@@ -114,9 +116,9 @@ public class RemoteAppAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private Jwt getJwt(final String token, final String contextPath) {
+    private Jwt getJwt(final String token, final String audience) {
         try {
-            return remoteAppJwtService.decode(token, contextPath);
+            return remoteAppJwtService.decode(token, audience);
         } catch (BadJwtException failed) {
             this.logger.debug("Failed to authenticate since the JWT was invalid");
             throw new InvalidBearerTokenException(failed.getMessage(), failed);
