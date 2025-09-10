@@ -18,9 +18,10 @@
 
 package com.onlyoffice.docs.jira.remote.client.jira.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
-
+@Builder
 @Data
 public class JiraAttachment {
     private Long id;

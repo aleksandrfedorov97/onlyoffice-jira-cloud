@@ -20,7 +20,9 @@ package com.onlyoffice.docs.jira.remote.web.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.onlyoffice.docs.jira.remote.aop.CurrentFitContext;
 import com.onlyoffice.docs.jira.remote.api.Context;
+import com.onlyoffice.docs.jira.remote.api.FitContext;
 import com.onlyoffice.docs.jira.remote.api.JiraContext;
 import com.onlyoffice.docs.jira.remote.api.Product;
 import com.onlyoffice.docs.jira.remote.api.XForgeTokenType;
@@ -44,7 +46,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.util.Map;
-import java.util.UUID;
 
 
 @RestController
@@ -65,18 +66,18 @@ public class RemoteAuthorizationController {
     @PostMapping
     public ResponseEntity<AuthorizationResponse> getAuthorization(
             final @AuthenticationPrincipal Jwt principal,
+            final @CurrentFitContext FitContext fitContext,
             final @RequestHeader("x-forge-oauth-system") String xForgeSystemToken,
             final @RequestHeader("x-forge-oauth-user") String xForgeUserToken,
             final @Valid @RequestBody AuthorizationRequest request
     ) throws ParseException {
         Product product = forgeProperties.getProductByAppId(principal.getAudience().getFirst());
         String accountId = principal.getClaimAsString("principal");
-        Map<String, Object> fitContext = principal.getClaimAsMap("context");
 
         Context remoteAppTokenContext = switch (product) {
             case JIRA -> JiraContext.builder()
                     .product(product)
-                    .cloudId(UUID.fromString(fitContext.get("cloudId").toString()))
+                    .cloudId(fitContext.cloudId())
                     .issueId(request.getParentId())
                     .attachmentId(request.getEntityId())
                     .build();

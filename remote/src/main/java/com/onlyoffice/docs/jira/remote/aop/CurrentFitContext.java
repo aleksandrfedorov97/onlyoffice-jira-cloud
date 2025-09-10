@@ -16,18 +16,17 @@
  *
  */
 
-package com.onlyoffice.docs.jira.remote.client.jira.dto;
+package com.onlyoffice.docs.jira.remote.aop;
 
-import lombok.Builder;
-import lombok.Data;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import java.util.Map;
 
-@Builder
-@Data
-public class JiraUser {
-    private String accountId;
-    private String displayName;
-    private String locale;
-    private Map<String, String> avatarUrls;
+@Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface CurrentFitContext {
 }

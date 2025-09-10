@@ -18,6 +18,8 @@
 
 package com.onlyoffice.docs.jira.remote.web.controller;
 
+import com.onlyoffice.docs.jira.remote.aop.CurrentFitContext;
+import com.onlyoffice.docs.jira.remote.api.FitContext;
 import com.onlyoffice.docs.jira.remote.api.Product;
 import com.onlyoffice.docs.jira.remote.client.jira.JiraClient;
 import com.onlyoffice.docs.jira.remote.client.jira.dto.JiraAttachment;
@@ -43,11 +45,8 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 import java.io.InputStream;
-import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.UUID;
 
 
 @RestController
@@ -61,11 +60,11 @@ public class RemoteCreateController {
     @PostMapping
     public ResponseEntity<CreateResponse> createAttachment(
             final @AuthenticationPrincipal Jwt principal,
+            final @CurrentFitContext FitContext fitContext,
             final @RequestHeader("x-forge-oauth-user") String xForgeUserToken,
             final @Valid @RequestBody CreateRequest request
-    ) throws ParseException {
+    ) {
         Product product = forgeProperties.getProductByAppId(principal.getAudience().getFirst());
-        Map<String, Object> fitContext = principal.getClaimAsMap("context");
         String issueId = request.getParentId();
         String title = request.getTitle();
         DocumentType documentType = request.getDocumentType();
@@ -81,7 +80,7 @@ public class RemoteCreateController {
         switch (product) {
             case JIRA:
                 List<JiraAttachment> newAttachments = jiraClient.createAttachment(
-                        UUID.fromString(fitContext.get("cloudId").toString()),
+                        fitContext.cloudId(),
                         issueId,
                         toDataBufferFlux(newBlankFile),
                         title + "." + fileExtension,

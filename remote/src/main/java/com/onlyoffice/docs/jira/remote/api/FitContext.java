@@ -16,18 +16,10 @@
  *
  */
 
-package com.onlyoffice.docs.jira.remote.client.jira.dto;
+package com.onlyoffice.docs.jira.remote.api;
 
-import lombok.Builder;
-import lombok.Data;
+import java.util.UUID;
 
-import java.util.Map;
 
-@Builder
-@Data
-public class JiraUser {
-    private String accountId;
-    private String displayName;
-    private String locale;
-    private Map<String, String> avatarUrls;
+public record FitContext(UUID cloudId) {
 }

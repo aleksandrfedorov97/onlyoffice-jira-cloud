@@ -18,6 +18,8 @@
 
 package com.onlyoffice.docs.jira.remote.web.controller;
 
+import com.onlyoffice.docs.jira.remote.aop.CurrentFitContext;
+import com.onlyoffice.docs.jira.remote.api.FitContext;
 import com.onlyoffice.docs.jira.remote.api.Product;
 import com.onlyoffice.docs.jira.remote.configuration.ForgeProperties;
 import com.onlyoffice.docs.jira.remote.entity.DemoServerConnection;
@@ -39,9 +41,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 
 
 @RestController
@@ -53,13 +53,13 @@ public class RemoteSettingsController {
 
     @GetMapping
     public ResponseEntity<SettingsResponse> getSettings(
-            final @AuthenticationPrincipal Jwt principal
+            final @AuthenticationPrincipal Jwt principal,
+            final @CurrentFitContext FitContext fitContext
     ) throws ParseException {
         Product product = forgeProperties.getProductByAppId(principal.getAudience().getFirst());
-        Map<String, Object> fitContext = principal.getClaimAsMap("context");
 
         DemoServerConnectionId demoServerConnectionId = DemoServerConnectionId.builder()
-                .cloudId(UUID.fromString(fitContext.get("cloudId").toString()))
+                .cloudId(fitContext.cloudId())
                 .product(product)
                 .build();
 
@@ -91,13 +91,13 @@ public class RemoteSettingsController {
 
     @PostMapping
     public ResponseEntity<SettingsResponse> saveSettings(
-            final @AuthenticationPrincipal Jwt principal
+            final @AuthenticationPrincipal Jwt principal,
+            final @CurrentFitContext FitContext fitContext
     ) throws ParseException {
         Product product = forgeProperties.getProductByAppId(principal.getAudience().getFirst());
-        Map<String, Object> fitContext = principal.getClaimAsMap("context");
 
         DemoServerConnectionId demoServerConnectionId = DemoServerConnectionId.builder()
-                .cloudId(UUID.fromString(fitContext.get("cloudId").toString()))
+                .cloudId(fitContext.cloudId())
                 .product(product)
                 .build();
 
