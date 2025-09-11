@@ -28,6 +28,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 
@@ -40,30 +41,34 @@ public final class SecurityUtils {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
 
-        if (authentication != null) {
-            if (authentication.getPrincipal() instanceof Jwt) {
-                return (Jwt) authentication.getPrincipal();
-            }
+        if (Objects.isNull(authentication)) {
+            throw new IllegalStateException("No authentication found in SecurityContext");
         }
 
-        return null;
+        Object principal = authentication.getPrincipal();
+        if (!(principal instanceof Jwt jwt)) {
+            throw new IllegalStateException("Authentication principal is not a Jwt");
+        }
+
+        return jwt;
     }
 
     public static Context getCurrentAppContext() {
         Jwt jwt = getCurrentPrincipal();
-        if (jwt != null) {
-            Map<String, Object> contextAsMap = jwt.getClaimAsMap("context");
-            String product = (String) contextAsMap.get("product");
 
-            switch (Product.valueOf(product)) {
-                case JIRA:
-                    return (Context) OBJECT_MAPPER.convertValue(contextAsMap, JiraContext.class);
-                default:
-                    throw new UnsupportedOperationException("Unsupported product: " + product);
-            }
+        Map<String, Object> contextAsMap = jwt.getClaimAsMap("context");
+        if (contextAsMap == null || !contextAsMap.containsKey("product")) {
+            throw new IllegalStateException("JWT context claim is missing or invalid");
         }
 
-        return null;
+        String product = (String) contextAsMap.get("product");
+
+        switch (Product.valueOf(product)) {
+            case JIRA:
+                return (Context) OBJECT_MAPPER.convertValue(contextAsMap, JiraContext.class);
+            default:
+                throw new UnsupportedOperationException("Unsupported product: " + product);
+        }
     }
 
     public static String getCurrentXForgeSystemTokenId() {
@@ -71,7 +76,6 @@ public final class SecurityUtils {
 
         return createXForgeSystemTokenId(context.getProduct(), context.getCloudId());
     }
-
 
     public static String getCurrentXForgeUserTokenId() {
         Jwt principal = getCurrentPrincipal();
