@@ -18,11 +18,12 @@
 
 package com.onlyoffice.docs.jira.remote.client.jira.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Map;
 
-
+@AllArgsConstructor
 @Data
 public class JiraSettings {
     private Map<String, Object> value;

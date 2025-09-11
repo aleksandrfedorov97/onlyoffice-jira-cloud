@@ -18,11 +18,13 @@
 
 package com.onlyoffice.docs.jira.remote.client.jira.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Map;
 
 
+@Builder
 @Data
 public class JiraPermissions {
     private Map<JiraPermissionsKey, JiraPermission> permissions;

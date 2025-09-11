@@ -18,9 +18,10 @@
 
 package com.onlyoffice.docs.jira.remote.client.jira.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-
+@AllArgsConstructor
 @Data
 public class JiraPermission {
     private String key;
