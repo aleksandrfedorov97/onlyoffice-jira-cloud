@@ -11,4 +11,10 @@
     <suppress files=".*java" checks="JavadocMethod"/>
 
     <suppress files="JiraDocsApplication.java" checks="HideUtilityClassConstructor"/>
+
+    <suppress files=".*Test.java" checks="HideUtilityClassConstructor"/>
+    <suppress files=".*Test.java" checks="MethodName"/>
+    <suppress files=".*Test.java" checks="MemberName"/>
+    <suppress files=".*Test.java" checks="VisibilityModifier"/>
+    <suppress files=".*Test.java" checks="MagicNumber"/>
 </suppressions>
