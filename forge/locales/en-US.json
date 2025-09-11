@@ -43,11 +43,11 @@
         "stop-editing-by-cause-delete": "Editing of this document has been stopped because it has been removed from the issue.",
         "stop-editing-by-cause-session-expired": "Editing of this document has been stopped because the current session has expired.",
         "session-expired": "The current session has expired.",
-        "please-save-changes": "Please save any unsaved changes to avoid losing data.",
+        "please-save-changes": "Please make sure to save any changes to prevent data loss.",
         "editor-will-be-reloaded": "The editor will be reloaded to continue working in ({time}).",
         "update-session-failed": "Unfortunately, it was not possible to extend the session.",
         "editin-will-stop": "Editing will stop in ({time}).",
-        "you-using-demo-server": "You are using public demo ONLYOFFICE Document Server. Please do not store private sensitive data."
+        "you-using-demo-server": "You are using the public demo server of ONLYOFFICE Docs. Please avoid storing any private or sensitive data."
       }
     },
     "main": {
@@ -70,7 +70,7 @@
   "error-state": {
     "common": {
       "title": "App loading error",
-      "description": "An unexpected error occurred while loading the application, please reload the application."
+      "description": "An unexpected error occurred while loading the application. Please reload it to continue."
     },
     "docs-api-undefined": {
       "title": "ONLYOFFICE Docs loading error",
@@ -94,7 +94,7 @@
       "title": "Reload App"
     },
     "create-in-app": {
-      "title": "Create in ONLYOFFICE"
+      "title": "Create with ONLYOFFICE"
     },
     "view-in-app": {
       "title": "View in ONLYOFFICE"
