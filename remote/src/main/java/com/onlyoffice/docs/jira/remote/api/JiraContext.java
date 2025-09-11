@@ -18,19 +18,35 @@
 
 package com.onlyoffice.docs.jira.remote.api;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
 
+import java.util.UUID;
 
-@AllArgsConstructor
+
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 @SuperBuilder
 public class JiraContext extends Context {
+    @NonNull
     private String issueId;
+    @NonNull
     private String attachmentId;
+
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public JiraContext(
+            final @NonNull @JsonProperty("product") Product product,
+            final @NonNull @JsonProperty("cloudId") UUID cloudId,
+            final @NonNull @JsonProperty("issueId") String issueId,
+            final @NonNull @JsonProperty("attachmentId") String attachmentId
+    ) {
+        super(product, cloudId);
+
+        this.issueId = issueId;
+        this.attachmentId = attachmentId;
+    }
 }

@@ -18,19 +18,27 @@
 
 package com.onlyoffice.docs.jira.remote.api;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
 
 import java.util.UUID;
 
 
-@AllArgsConstructor
 @Data
-@NoArgsConstructor
 @SuperBuilder
 public class Context {
     private Product product;
     private UUID cloudId;
+
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public Context(
+            final @NonNull @JsonProperty("product") Product product,
+            final @NonNull @JsonProperty("cloudId") UUID cloudId
+    ) {
+        this.product = product;
+        this.cloudId = cloudId;
+    }
 }

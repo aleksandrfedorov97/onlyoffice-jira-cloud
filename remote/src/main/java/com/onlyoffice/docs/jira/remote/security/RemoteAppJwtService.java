@@ -18,9 +18,12 @@
 
 package com.onlyoffice.docs.jira.remote.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.onlyoffice.docs.jira.remote.api.JiraContext;
+import com.onlyoffice.docs.jira.remote.api.Product;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
@@ -28,6 +31,8 @@ import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtAudienceValidator;
+import org.springframework.security.oauth2.jwt.JwtClaimNames;
+import org.springframework.security.oauth2.jwt.JwtClaimValidator;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.security.oauth2.jwt.JwtTimestampValidator;
@@ -41,6 +46,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
@@ -48,6 +54,8 @@ import java.util.concurrent.TimeUnit;
 public class RemoteAppJwtService {
     private final NimbusJwtEncoder nimbusJwtEncoder;
     private final NimbusJwtDecoder nimbusJwtDecoder;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public RemoteAppJwtService(final @Value("${app.security.secret}") String secret) {
         SecretKey secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "RAW");
@@ -97,7 +105,30 @@ public class RemoteAppJwtService {
     public Jwt decode(final String token, final String audience) {
         List<OAuth2TokenValidator<Jwt>> validators = List.of(
                 new JwtTimestampValidator(),
-                new JwtAudienceValidator(audience)
+                new JwtAudienceValidator(audience),
+                new JwtClaimValidator<>(JwtClaimNames.SUB, (String sub) -> Objects.nonNull(sub) && !sub.isBlank()),
+                new JwtClaimValidator<>("context",
+                        (Map<String, Object> contextAsMap) -> {
+                            try {
+                                if (contextAsMap == null || !contextAsMap.containsKey("product")) {
+                                    return false;
+                                }
+
+                                String product = (String) contextAsMap.get("product");
+
+                                switch (Product.valueOf(product)) {
+                                    case JIRA:
+                                        objectMapper.convertValue(contextAsMap, JiraContext.class);
+                                        return true;
+                                    default:
+                                        return false;
+                                }
+                            } catch (Exception e) {
+                                return false;
+                            }
+
+                        }
+                )
         );
 
         nimbusJwtDecoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(validators));
