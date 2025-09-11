@@ -20,6 +20,7 @@ package com.onlyoffice.docs.jira.remote.web.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.onlyoffice.docs.jira.remote.aop.CurrentAccountId;
 import com.onlyoffice.docs.jira.remote.aop.CurrentFitContext;
 import com.onlyoffice.docs.jira.remote.aop.CurrentProduct;
 import com.onlyoffice.docs.jira.remote.api.Context;
@@ -36,8 +37,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -64,15 +63,13 @@ public class RemoteAuthorizationController {
 
     @PostMapping
     public ResponseEntity<AuthorizationResponse> getAuthorization(
-            final @AuthenticationPrincipal Jwt principal,
             final @CurrentFitContext FitContext fitContext,
             final @CurrentProduct Product product,
+            final @CurrentAccountId String accountId,
             final @RequestHeader("x-forge-oauth-system") String xForgeSystemToken,
             final @RequestHeader("x-forge-oauth-user") String xForgeUserToken,
             final @Valid @RequestBody AuthorizationRequest request
     ) throws ParseException {
-        String accountId = principal.getClaimAsString("principal");
-
         Context remoteAppTokenContext = switch (product) {
             case JIRA -> JiraContext.builder()
                     .product(product)
