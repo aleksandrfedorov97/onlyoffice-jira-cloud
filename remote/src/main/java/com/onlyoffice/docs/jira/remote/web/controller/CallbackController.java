@@ -24,6 +24,7 @@ import com.onlyoffice.manager.settings.SettingsManager;
 import com.onlyoffice.model.documenteditor.Callback;
 import com.onlyoffice.service.documenteditor.callback.CallbackService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,22 +44,25 @@ public class CallbackController {
     private final CallbackService callbackService;
 
     @PostMapping("jira")
-    public ResponseEntity<Map<String, Integer>> callbackJira(
+    public ResponseEntity<Map<String, Object>> callbackJira(
             final @RequestHeader Map<String, String> headers,
             final @RequestBody Callback callback
-    ) {
+    ) throws Exception {
         JiraContext jiraContext = (JiraContext) SecurityUtils.getCurrentAppContext();
 
+
+        String authorizationHeader = Optional.ofNullable(headers.get(settingsManager.getSecurityHeader()))
+                        .orElse(headers.get(settingsManager.getSecurityHeader().toLowerCase()));
+
+        Callback verifiedCallback;
         try {
-            String authorizationHeader = Optional.ofNullable(headers.get(settingsManager.getSecurityHeader()))
-                            .orElse(headers.get(settingsManager.getSecurityHeader().toLowerCase()));
-
-            Callback verifiedCallback = callbackService.verifyCallback(callback, authorizationHeader);
-
-            callbackService.processCallback(verifiedCallback, jiraContext.getAttachmentId());
+            verifiedCallback = callbackService.verifyCallback(callback, authorizationHeader);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("message", "Access denied: " + e.getMessage()));
         }
+
+        callbackService.processCallback(verifiedCallback, jiraContext.getAttachmentId());
 
         return ResponseEntity.ok(Map.of("error", 0));
     }

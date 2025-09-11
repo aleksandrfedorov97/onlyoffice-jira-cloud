@@ -26,6 +26,7 @@ import com.onlyoffice.docs.jira.remote.security.XForgeTokenRepository;
 import com.onlyoffice.manager.security.JwtManager;
 import com.onlyoffice.manager.settings.SettingsManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -48,7 +49,7 @@ public class DownloadController {
     private final XForgeTokenRepository xForgeTokenRepository;
 
     @GetMapping("jira")
-    public ResponseEntity<Void> downloadJira(final @RequestHeader Map<String, String> headers) {
+    public ResponseEntity<Map<String, Object>> downloadJira(final @RequestHeader Map<String, String> headers) {
         if (settingsManager.isSecurityEnabled()) {
             String securityHeader = settingsManager.getSecurityHeader();
             String securityHeaderValue = Optional.ofNullable(headers.get(securityHeader))
@@ -58,13 +59,15 @@ public class DownloadController {
                     ? securityHeaderValue.substring(authorizationPrefix.length()) : securityHeaderValue;
 
             if (Objects.isNull(token) || token.isEmpty()) {
-                throw new SecurityException("Expected JWT");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("message", "Access denied: Not found authorization token"));
             }
 
             try {
                 String payload = jwtManager.verify(token);
             } catch (Exception e) {
-                throw new SecurityException("JWT verification failed!");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("message", "Access denied: " + e.getMessage()));
             }
         }
         JiraContext jiraContext = (JiraContext) SecurityUtils.getCurrentAppContext();
