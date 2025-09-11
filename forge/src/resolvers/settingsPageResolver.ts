@@ -46,7 +46,12 @@ settingsPageResolver.define("saveSettings", async (request: Request) => {
       demo: payload["demo"] || false,
     })) || {};
 
-  const remoteSettings = await postRemoteSettings();
+  let remoteSettings;
+  if (settings["demo"]) {
+    remoteSettings = await postRemoteSettings();
+  } else {
+    remoteSettings = await getRemoteSettings();
+  }
 
   settings["demoAvailable"] = remoteSettings.demoAvailable;
   settings["demoStart"] = remoteSettings.demoStart;

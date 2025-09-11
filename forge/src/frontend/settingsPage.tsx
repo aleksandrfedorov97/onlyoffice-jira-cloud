@@ -249,7 +249,11 @@ const SettingsPage = () => {
                       name="url"
                       placeholder="https://"
                       isInvalid={Object.keys(validationErrors).includes("url")}
-                      isDisabled={submitting || Boolean(localSettings["demo"])}
+                      isDisabled={
+                        submitting ||
+                        (Boolean(localSettings["demo"]) &&
+                          !!settings["demoAvailable"])
+                      }
                       value={localSettings["url"] as string}
                       onChange={(e) => onChange("url", e.target.value)}
                     />
@@ -277,7 +281,11 @@ const SettingsPage = () => {
                       isInvalid={Object.keys(validationErrors).includes(
                         "security.key",
                       )}
-                      isDisabled={submitting || Boolean(localSettings["demo"])}
+                      isDisabled={
+                        submitting ||
+                        (Boolean(localSettings["demo"]) &&
+                          !!settings["demoAvailable"])
+                      }
                       value={localSettings["security.key"] as string}
                       onChange={(e) => onChange("security.key", e.target.value)}
                     />
@@ -303,7 +311,11 @@ const SettingsPage = () => {
                     <Textfield
                       id="security.header"
                       name="security.header"
-                      isDisabled={submitting || Boolean(localSettings["demo"])}
+                      isDisabled={
+                        submitting ||
+                        (Boolean(localSettings["demo"]) &&
+                          !!settings["demoAvailable"])
+                      }
                       value={localSettings["security.header"] as string}
                       onChange={(e) =>
                         onChange("security.header", e.target.value)
