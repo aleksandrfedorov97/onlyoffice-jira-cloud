@@ -6,25 +6,31 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.5.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.onlyoffice</groupId>
-	<artifactId>docs-jira-remote</artifactId>
+	<artifactId>docs-atlassian-remote</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jira-docs</name>
-	<description>Demo project for Spring Boot</description>
-	<url/>
+	<name>docs-atlassian-remote</name>
+	<description>ONLYOFFICE Docs integration remote service with Atlassian</description>
+	<url>https://github.com/ONLYOFFICE/onlyoffice-jira-cloud</url>
 	<licenses>
-		<license/>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<email>integration@onlyoffice.com</email>
+			<organization>Ascensio System SIA</organization>
+			<organizationUrl>https://www.onlyoffice.com/</organizationUrl>
+		</developer>
 	</developers>
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+		<connection>scm:git:git@github.com:ONLYOFFICE/onlyoffice-jira-cloud.git</connection>
+		<developerConnection>scm:git:git@github.com:ONLYOFFICE/onlyoffice-jira-cloud.git</developerConnection>
+		<url>https://github.com/ONLYOFFICE/onlyoffice-jira-cloud</url>
 	</scm>
 	<properties>
 		<java.version>21</java.version>
