@@ -1,0 +1,85 @@
+ONLYOFFICE Docs Jira App  uses code from the following 3rd party projects:
+
+@forge/api          - API methods exposed during runtime in Forge apps. (https://developer.atlassian.com/platform/marketplace/atlassian-developer-terms/)
+License:              Atlassian
+License File:         forge-api.license
+
+@forge/bridge       - Forge Bridge API. (https://developer.atlassian.com/platform/marketplace/atlassian-developer-terms/)
+License:              Atlassian
+License File:         forge-bridge.license
+
+@forge/kvs          - Library for Forge KVS. (https://developer.atlassian.com/platform/marketplace/atlassian-developer-terms/)
+License:              Atlassian
+License File:         forge-kvs.license
+
+@forge/react        - Forge React reconciler. (https://developer.atlassian.com/platform/marketplace/atlassian-developer-terms/)
+License:              Atlassian
+License File:         forge-react.license
+
+@forge/resolver     - Forge function resolver. (https://developer.atlassian.com/platform/marketplace/atlassian-developer-terms/)
+License:              Atlassian
+License File:         forge-resolver.license
+
+react               - React is a JavaScript library for creating user interfaces. (https://github.com/facebook/react/blob/main/LICENSE)
+License:              MIT
+License File:         react.license
+
+@atlaskit/app-provider - A top level provider for the Design System. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:              Atlassian
+License File:         atlaskit-app-provider.license
+
+@atlaskit/button     - A button triggers an event or action. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-button.license
+
+@atlaskit/css-reset  - A base stylesheet for the Atlassian Design System. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-css-reset.license
+
+@atlaskit/dynamic-table - A dynamic table displays rows of data with built-in pagination, sorting, and re-ordering functionality. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-dynamic-table.license
+
+@atlaskit/empty-state - Atlaskit Empty State component. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-empty-state.license
+
+@atlaskit/flag       - Atlaskit Flag component. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-flag.license
+
+@atlaskit/form       - Atlaskit Form component. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-form.license
+
+@atlaskit/icon       - Atlaskit Icon component. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-icon.license
+
+@atlaskit/modal-dialog - Atlaskit Modal Dialog component. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-modal-dialog.license
+
+@atlaskit/select     - Atlaskit Select component. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-select.license
+
+@atlaskit/spinner    - Atlaskit Spinner component. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-spinner.license
+
+@atlaskit/textfield  - Atlaskit Textfield component. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-textfield.license
+
+@atlaskit/tokens     - Atlaskit Design Tokens. (https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/LICENSE)
+License:               Atlassian
+License File:          atlaskit-tokens.license
+
+bytes                - Utility to parse a string bytes to bytes and vice-versa. (https://github.com/visionmedia/bytes.js/blob/master/LICENSE)
+License:               MIT
+License File:          bytes.license
+
+react-dom            - React package for working with the DOM. (https://github.com/facebook/react/blob/main/LICENSE)
+License:               MIT
+License File:          react-dom.license
