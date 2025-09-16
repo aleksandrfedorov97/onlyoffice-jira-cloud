@@ -3,7 +3,7 @@ app:
     name: nodejs22.x
     memoryMB: 256
     architecture: arm64
-  id: ari:cloud:ecosystem::app/${JIRA_FORGE_APP_ID}
+  id: ari:cloud:ecosystem::app/${FORGE_APP_ID}
 
 modules:
   jira:adminPage:
@@ -49,9 +49,9 @@ translations:
 remotes:
   - key: onlyoffice-backend
     baseUrl:
-      default: "${REMOTE_APP_URL}"
-      US: "${REMOTE_APP_URL}"
-      EU: "${REMOTE_APP_URL}"
+      default: "${FORGE_REMOTE_APP_URL}"
+      US: "${FORGE_REMOTE_APP_URL}"
+      EU: "${FORGE_REMOTE_APP_URL}"
     operations:
       - compute
       - storage
@@ -65,10 +65,8 @@ remotes:
 
 environment:
   variables:
-    - key: JIRA_FORGE_APP_ID
-      default: YOUR_JIRA_FORGE_APP_ID
-    - key: REMOTE_APP_URL
-      default: YOUR_REMOTE_APP_URL
+    - FORGE_APP_ID
+    - FORGE_REMOTE_APP_URL
 
 permissions:
   content:
@@ -85,5 +83,5 @@ permissions:
     - read:app-user-token
   external:
     frames:
-      - address: ${REMOTE_APP_URL}/editor/jira
+      - address: ${FORGE_REMOTE_APP_URL}/editor/jira
       - address: https://api.media.atlassian.com/

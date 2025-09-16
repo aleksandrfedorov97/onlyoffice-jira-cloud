@@ -1,0 +1,40 @@
+name: CI for forge
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened]
+    branches: [master, develop]
+    paths:
+      - 'forge/**/*.ts'
+      - 'forge/**/*.tsx'
+      - 'forge/**/*.yml'
+  push:
+    branches: [master, develop]
+    paths:
+      - 'forge/**/*.ts'
+      - 'forge/**/*.tsx'
+      - 'forge/**/*.yml'
+
+jobs:
+  lint:
+    name: Lint 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Dependencies
+        run: |
+          cd ${{ github.workspace }}/forge
+          npm install
+
+      - name: Run Code Style Checks
+        run: |
+          cd ${{ github.workspace }}/forge
+          npm run eslint
