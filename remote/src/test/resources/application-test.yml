@@ -29,9 +29,6 @@ spring:
     hibernate:
       ddl-auto: create
   datasource:
-    url: jdbc:postgresql://localhost:5432/onlyoffice_docs_atlassian_cloud
-    username: onlyoffice
-    password: onlyoffice
     hikari:
       schema: public
       connection-init-sql: CREATE SCHEMA IF NOT EXISTS public
