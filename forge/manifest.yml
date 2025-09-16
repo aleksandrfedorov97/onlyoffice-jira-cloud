@@ -48,15 +48,9 @@ translations:
 
 remotes:
   - key: onlyoffice-backend
-    baseUrl:
-      default: "${FORGE_REMOTE_APP_URL}"
-      US: "${FORGE_REMOTE_APP_URL}"
-      EU: "${FORGE_REMOTE_APP_URL}"
+    baseUrl: "${FORGE_REMOTE_APP_URL}"
     operations:
       - compute
-      - storage
-    storage:
-      inScopeEUD: true
     auth:
       appSystemToken:
         enabled: true
