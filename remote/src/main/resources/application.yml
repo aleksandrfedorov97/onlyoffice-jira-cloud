@@ -1,7 +1,7 @@
 app:
-  base-url: ${REMOTE_APP_URL}
+  base-url: ${APP_BASE_URL}
   security:
-    secret: ${REMOTE_APP_SECRET_KEY}
+    secret: ${APP_SECRET_KEY}
     ttl:
       default: 5
       callback: 240
@@ -11,7 +11,7 @@ app:
 forge:
   products:
     JIRA:
-      appId: ari:cloud:ecosystem::app/${JIRA_FORGE_APP_ID}
+      appId: ari:cloud:ecosystem::app/${FORGE_JIRA_APP_ID}
 
 spring:
   security:
