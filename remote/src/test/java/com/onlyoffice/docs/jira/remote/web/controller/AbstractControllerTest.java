@@ -21,8 +21,6 @@ package com.onlyoffice.docs.jira.remote.web.controller;
 import com.onlyoffice.docs.jira.remote.client.jira.JiraClient;
 import com.onlyoffice.docs.jira.remote.security.XForgeTokenRepository;
 import com.redis.testcontainers.RedisContainer;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
