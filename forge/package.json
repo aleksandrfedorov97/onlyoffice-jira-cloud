@@ -1,6 +1,6 @@
 {
-  "name": "@onlyoffice/docs-jira-forge",
-  "description": "ONLYOFFICE Docs Jira App",
+  "name": "@onlyoffice/docs-jira-cloud",
+  "description": "ONLYOFFICE app for Jira Cloud",
   "author": "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)",
     "maintainers": [
     "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)"
