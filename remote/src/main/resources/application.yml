@@ -29,7 +29,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5432/onlyoffice_docs_atlassian_cloud
+    url: jdbc:postgresql://localhost:5432/onlyoffice_docs_atlassian_remote
     username: onlyoffice
     password: onlyoffice
     hikari:
