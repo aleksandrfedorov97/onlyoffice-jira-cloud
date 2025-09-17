@@ -89,6 +89,7 @@ public class SecurityConfiguration {
                 })
                 .authorizeHttpRequests(auth ->
                                 auth
+                                        .requestMatchers("/api/v1/health").permitAll()
                                         .requestMatchers("/editor/**").authenticated()
                                         .requestMatchers("/api/**").authenticated()
                                         .anyRequest().permitAll()
