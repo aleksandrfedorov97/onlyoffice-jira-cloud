@@ -1,39 +1,76 @@
-# Forge Hello World
+# ONLYOFFICE Docs for Jira Cloud
 
-This project contains a Forge app written in Javascript that displays `Hello World!` in a Jira issue panel. 
-
-See [developer.atlassian.com/platform/forge/](https://developer.atlassian.com/platform/forge) for documentation and tutorials explaining Forge.
+This is an integration solution that allows Jira Cloud users to work with office documents directly from the Jira
+interface using ONLYOFFICE Docs editors. The project provides preview, editing, creation, and collaboration features
+for documents, presentations, and spreadsheets, as well as protection and security for file transfer and storage.
 
 ## Requirements
+ - ONLYOFFICE Docs Atlassian Remote
+ - ONLYOFFICE Docs (Document Server)
 
-See [Set up Forge](https://developer.atlassian.com/platform/forge/set-up-forge/) for instructions to get set up.
+## Development
 
-## Quick start
+1. Clone project from the GitHub repository:
+```
+git clone https://github.com/ONLYOFFICE/onlyoffice-jira-cloud
+```
 
-- Modify your app frontend by editing the `src/frontend/index.jsx` file.
+2. Install the project dependencies:
+```
+npm install
+```
 
-- Modify your app backend by editing the `src/resolvers/index.js` file to define resolver functions. See [Forge resolvers](https://developer.atlassian.com/platform/forge/runtime-reference/custom-ui-resolver/) for documentation on resolver functions.
+3. Install dependencies in Custom UI Project:
+```
+cd static/onlyoffice-jira-docs-forge-custom-ui
+npm install
+```
 
-- Build and deploy your app by running:
+4. Build Custom UI Project:
+```
+npm run build
+```
+
+5. Install the Forge CLI globally by running:
+```
+npm install -g @forge/cli
+```
+
+6. Log in to the Forge CLI ([Learn more](https://developer.atlassian.com/platform/forge/getting-started-learn/#log-in-with-an-atlassian-api-token)):
+```
+forge login
+```
+
+7. Specify environment variables in the manifest.yml file:
+```
+environment:
+  variables:
+    - key: FORGE_APP_ID
+      default: <YOUR_FORGE_APP_ID>
+    - key: FORGE_REMOTE_APP_URL
+      default: <YOUR_REMOTE_APP_URL>
+```
+
+8. Navigate to the app's top-level directory and deploy your app by running ([Learn more](https://developer.atlassian.com/platform/forge/build-a-hello-world-app-in-bitbucket/#install-your-app)):
 ```
 forge deploy
 ```
 
-- Install your app in an Atlassian site by running:
+9. Install your app by running:
 ```
 forge install
 ```
 
-- Develop your app by running `forge tunnel` to proxy invocations locally:
+10. You can start tunneling by running:
 ```
 forge tunnel
 ```
 
-### Notes
-- Use the `forge deploy` command when you want to persist code changes.
-- Use the `forge install` command when you want to install the app on a new site.
-- Once the app is installed on a site, the site picks up the new app changes you deploy without needing to rerun the install command.
+## Feedback and support
 
-## Support
+In case you have any issues, questions, or suggestions for the ONLYOFFICE Docs for Jira Cloud, please refer to
+the [Issues](https://github.com/ONLYOFFICE/onlyoffice-jira-cloud/issues) section.
 
-See [Get help](https://developer.atlassian.com/platform/forge/get-help/) for how to get help and provide feedback.
+Official project website: [www.onlyoffice.com](https://www.onlyoffice.com/).
+
+Support forum: [forum.onlyoffice.com](https://forum.onlyoffice.com/).
