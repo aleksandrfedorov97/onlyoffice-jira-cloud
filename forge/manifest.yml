@@ -32,7 +32,7 @@ resources:
   - key: settings-page
     path: src/frontend/settingsPage.tsx
   - key: custom-ui
-    path: static/onlyoffice-jira-docs-forge-custom-ui/build
+    path: static/onlyoffice-docs-jira-cloud-custom-ui/build
   - key: assets
     path: src/assets
 
