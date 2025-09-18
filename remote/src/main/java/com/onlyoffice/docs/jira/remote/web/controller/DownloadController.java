@@ -33,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.ClientResponse;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.util.Map;
 import java.util.Objects;
@@ -49,7 +51,7 @@ public class DownloadController {
     private final XForgeTokenRepository xForgeTokenRepository;
 
     @GetMapping("jira")
-    public ResponseEntity<Map<String, Object>> downloadJira(final @RequestHeader Map<String, String> headers) {
+    public ResponseEntity<StreamingResponseBody> downloadJira(final @RequestHeader Map<String, String> headers) {
         if (settingsManager.isSecurityEnabled()) {
             String securityHeader = settingsManager.getSecurityHeader();
             String securityHeaderValue = Optional.ofNullable(headers.get(securityHeader))
@@ -59,17 +61,19 @@ public class DownloadController {
                     ? securityHeaderValue.substring(authorizationPrefix.length()) : securityHeaderValue;
 
             if (Objects.isNull(token) || token.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(Map.of("message", "Access denied: Not found authorization token"));
+                throw new ResponseStatusException(
+                        HttpStatus.UNAUTHORIZED,
+                        "Access denied: Not found authorization token"
+                );
             }
 
             try {
                 String payload = jwtManager.verify(token);
             } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(Map.of("message", "Access denied: " + e.getMessage()));
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Access denied: " + e.getMessage());
             }
         }
+
         JiraContext jiraContext = (JiraContext) SecurityUtils.getCurrentAppContext();
 
         ClientResponse clientResponse = jiraClient.getAttachmentData(
@@ -81,9 +85,11 @@ public class DownloadController {
                 )
         );
 
+        StreamingResponseBody emptyBody = outputStream -> { };
+
         return ResponseEntity
                 .status(clientResponse.statusCode())
                 .headers(clientResponse.headers().asHttpHeaders())
-                .build();
+                .body(emptyBody);
     }
 }
