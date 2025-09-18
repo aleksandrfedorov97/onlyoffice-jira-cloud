@@ -26,6 +26,7 @@ import com.onlyoffice.docs.jira.remote.security.XForgeTokenRepository;
 import com.onlyoffice.manager.security.JwtManager;
 import com.onlyoffice.manager.settings.SettingsManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.util.Map;
 import java.util.Objects;
@@ -51,7 +51,7 @@ public class DownloadController {
     private final XForgeTokenRepository xForgeTokenRepository;
 
     @GetMapping("jira")
-    public ResponseEntity<StreamingResponseBody> downloadJira(final @RequestHeader Map<String, String> headers) {
+    public ResponseEntity<Void> downloadJira(final @RequestHeader Map<String, String> headers) {
         if (settingsManager.isSecurityEnabled()) {
             String securityHeader = settingsManager.getSecurityHeader();
             String securityHeaderValue = Optional.ofNullable(headers.get(securityHeader))
@@ -85,11 +85,16 @@ public class DownloadController {
                 )
         );
 
-        StreamingResponseBody emptyBody = outputStream -> { };
+        HttpHeaders httpHeaders = new HttpHeaders();
+        clientResponse.headers().asHttpHeaders().forEach((httpHeader, values) -> {
+            if (!httpHeader.equalsIgnoreCase("Transfer-Encoding")) {
+                httpHeaders.put(httpHeader, values);
+            }
+        });
 
         return ResponseEntity
                 .status(clientResponse.statusCode())
-                .headers(clientResponse.headers().asHttpHeaders())
-                .body(emptyBody);
+                .headers(httpHeaders)
+                .build();
     }
 }
