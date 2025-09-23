@@ -1,118 +1,118 @@
-{
+﻿{
   "page": {
     "settings": {
-      "title": "ONLYOFFICE Docs Configuration",
+      "title": "Configurazione ONLYOFFICE Docs",
       "welcome": {
-        "header": "Welcome to ONLYOFFICE Docs!",
-        "description": "View, edit, and co-edit office documents from Jira Cloud using ONLYOFFICE Docs",
+        "header": "Benvenuto in ONLYOFFICE Docs!",
+        "description": "Visualizza, modifica, co-edita documenti d'ufficio da Jira Cloud usando ONLYOFFICE Docs",
         "links": {
-          "learn-more": "Learn more",
-          "suggest-feature": "Suggest a feature"
+          "learn-more": "Scopri di più",
+          "suggest-feature": "Suggerisci una funzione"
         }
       },
       "connections-settings": {
-        "header": "Connection Settings",
+        "header": "Impostazioni di connessione",
         "fields": {
           "url": {
-            "title": "ONLYOFFICE Docs address",
-            "description": "Here, please specify the address of your ONLYOFFICE Docs server."
+            "title": "Indirizzo ONLYOFFICE Docs",
+            "description": "Specifica qui l'indirizzo del tuo server ONLYOFFICE Docs."
           },
           "security-key": {
-            "title": "ONLYOFFICE Docs secret key",
-            "description": "Use the auto-generated JWT secret key or set your own here and the same one in the ONLYOFFICE Docs config file."
+            "title": "Chiave segreta ONLYOFFICE Docs",
+            "description": "Usa la chiave segreta JWT generata automaticamente o imposta la tua qui e la stessa nel file di configurazione di ONLYOFFICE Docs."
           },
           "security-header": {
-            "title": "Authorization header",
-            "description": "Leave blank to use default header"
+            "title": "Intestazione di autorizzazione",
+            "description": "Lascia vuoto per usare l'intestazione predefinita"
           },
           "demo": {
-            "title": "Connect to demo ONLYOFFICE Docs server",
-            "description-active": "You are successfully connected to the demo server. It will be available until {time}. To disable it, uncheck the box.",
-            "description-availabale": "This is a public test server, please do not use it for private sensitive data. The server will be available during a 30-day period.",
-            "description-not-availabale": "The 30-day test period is over. You are no longer able to connect to the demo server."
+            "title": "Connetti al server demo di ONLYOFFICE Docs",
+            "description-active": "Sei connesso con successo al server demo. Sarà disponibile fino a {time}. Per disattivarlo, deseleziona la casella.",
+            "description-availabale": "Questo è un server di test pubblico, non usarlo per dati privati o sensibili. Il server sarà disponibile per un periodo di 30 giorni.",
+            "description-not-availabale": "Il periodo di prova di 30 giorni è terminato. Non puoi più connetterti al server demo."
           }
         }
       },
       "messages": {
-        "settings-saved": "Settings saved successfully.",
-        "save-settings-failed": "Error saving settings, please try again"
+        "settings-saved": "Le impostazioni sono state salvate correttamente.",
+        "save-settings-failed": "Errore durante il salvataggio delle impostazioni. Riprova"
       }
     },
     "editor": {
       "messages": {
-        "stop-editing-by-cause-delete": "Editing of this document has been stopped because it has been removed from the issue.",
-        "stop-editing-by-cause-session-expired": "Editing of this document has been stopped because the current session has expired.",
-        "session-expired": "The current session has expired.",
-        "please-save-changes": "Please make sure to save any changes to prevent data loss.",
-        "editor-will-be-reloaded": "The editor will be reloaded to continue working in ({time}).",
-        "update-session-failed": "Unfortunately, it was not possible to extend the session.",
-        "editin-will-stop": "Editing will stop in ({time}).",
-        "you-using-demo-server": "You are using the public demo server of ONLYOFFICE Docs. Please avoid storing any private or sensitive data."
+        "stop-editing-by-cause-delete": "La modifica di questo documento è stata interrotta perché è stato rimosso dal ticket.",
+        "stop-editing-by-cause-session-expired": "La modifica di questo documento è stata interrotta perché la sessione corrente è scaduta.",
+        "session-expired": "La sessione corrente è scaduta.",
+        "please-save-changes": "Assicurati di salvare eventuali modifiche per evitare la perdita dei dati.",
+        "editor-will-be-reloaded": "L'editor verrà ricaricato per continuare a lavorare in ({time}).",
+        "update-session-failed": "Purtroppo non è stato possibile estendere la sessione.",
+        "editin-will-stop": "La modifica terminerà in ({time}).",
+        "you-using-demo-server": "Stai usando il server demo pubblico di ONLYOFFICE Docs. Evita di salvare dati privati o sensibili."
       }
     },
     "main": {
-      "empty-file-list": "There is nothing here yet. Upload or create a file to get started."
-    }, 
+      "empty-file-list": "Qui non c'è ancora nulla. Carica o crea un file per iniziare."
+    },
     "create": {
-      "title": "Create with ONLYOFFICE",
+      "title": "Crea con ONLYOFFICE",
       "fields": {
-        "title": "Title",
-        "document-type": "Document Type",
-        "new-document": "New document"
+        "title": "Titolo",
+        "document-type": "Tipo di documento",
+        "new-document": "Nuovo documento"
       },
       "messages": {
-        "invalid-file-name": "The file name contains invalid characters: \\ / : * ? \" < > |",
-        "attachment-created": "Attachment \"{filename}\" created successfully.",
-        "create-attachment-failed": "Failed to create attachment. Please try again."
+        "invalid-file-name": "Il nome del file contiene caratteri non validi: \\ / : * ? \" < > |",
+        "attachment-created": "Allegato \"{filename}\" creato con successo.",
+        "create-attachment-failed": "Creazione dell'allegato non riuscita. Riprova."
       }
     }
   },
   "error-state": {
     "common": {
-      "title": "App loading error",
-      "description": "An unexpected error occurred while loading the application. Please reload it to continue."
+      "title": "Errore di caricamento dell'app",
+      "description": "Si è verificato un errore imprevisto durante il caricamento dell'applicazione. Ricaricala per continuare."
     },
     "docs-api-undefined": {
-      "title": "ONLYOFFICE Docs loading error",
-      "description": "ONLYOFFICE Docs server cannot be reached. Please contact admin."
+      "title": "Errore di caricamento ONLYOFFICE Docs",
+      "description": "Il server ONLYOFFICE Docs non è raggiungibile. Contatta l'amministratore."
     }
   },
   "buttons": {
     "create": {
-      "title": "Create"
+      "title": "Crea"
     },
     "cancel": {
-      "title": "Cancel"
+      "title": "Annulla"
     },
     "save": {
-      "title": "Save"
+      "title": "Salva"
     },
     "get-now": {
-      "title": "Get Now"
+      "title": "Ottieni ora"
     },
     "reload-app": {
-      "title": "Reload App"
+      "title": "Ricarica app"
     },
     "create-in-app": {
-      "title": "Create with ONLYOFFICE"
+      "title": "Crea con ONLYOFFICE"
     },
     "view-in-app": {
-      "title": "View in ONLYOFFICE"
+      "title": "Visualizza in ONLYOFFICE"
     },
     "edit-in-app": {
-      "title": "Edit in ONLYOFFICE"
+      "title": "Modifica in ONLYOFFICE"
     },
     "download": {
-      "title": "Download"
+      "title": "Scarica"
     }
   },
   "labels": {
-    "warning": "Warning!",
-    "loading": "Loading",
-    "last-updated": "{size} / Last updated: {time} by {user}"
+    "warning": "Attenzione!",
+    "loading": "Caricamento",
+    "last-updated": "{size} / Ultimo aggiornamento: {time} da {user}"
   },
   "docs-cloud-banner": {
     "header": "ONLYOFFICE Docs Cloud",
-    "description": "Easily launch the editors in the cloud without downloading and installation"
+    "description": "Avvia facilmente gli editor nel cloud senza download e installazione"
   }
 }
