@@ -38,8 +38,16 @@ resources:
 
 translations:
   resources:
+    - key: de-DE
+      path: locales/de-DE.json
     - key: en-US
       path: locales/en-US.json
+    - key: es-ES
+      path: locales/es-ES.json
+    - key: fr-FR
+      path: locales/fr-FR.json
+    - key: it-IT
+      path: locales/it-IT.json
     - key: ru-RU
       path: locales/ru-RU.json
 

@@ -57,7 +57,15 @@
       "title": "Create with ONLYOFFICE",
       "fields": {
         "title": "Title",
-        "document-type": "Document Type",
+        "document-type": {
+          "title": "Document Type",
+          "options": {
+            "word": "Text document",
+            "cell": "Spreadsheet",
+            "slide": "Presentation",
+            "pdf": "PDF Form"
+          }
+        },
         "new-document": "New document"
       },
       "messages": {
