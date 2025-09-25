@@ -8,28 +8,12 @@ This app allows users to create and edit office files in [Jira Cloud](https://ww
 * Co-edit documents in real time: two co-editing modes (Fast and Strict), Track Changes, comments, built-in chat.
 * Create new files directly from Jira Cloud.
 
-### Supported formats
+Supported formats:
+See [ONLYOFFICE Docs Atlassian Remote -> Supported Formats](https://github.com/ONLYOFFICE/docs-atlassian-remote/remote?tab=readme-ov-file#supported-formats)
 
-**For viewing:**
-
-* **WORD:** DOC, DOCM, DOCX, DOT, DOTM, DOTX, EPUB, FB2, FODT, HTM, HTML, HWP, HWPX, MD, MHT, MHTML, ODT, OTT, PAGES, RTF, STW, SXW, TXT, WPS, WPT, XML
-* **CELL:** CSV, ET, ETT, FODS, NUMBERS, ODS, OTS, SXC, XLS, XLSM, XLSX, XLT, XLTM, XLTX
-* **SLIDE:** DPS, DPT, FODP, KEY, ODG, ODP, OTP, POT, POTM, POTX, PPS, PPSM, PPSX, PPT, PPTM, PPTX, SXI
-* **PDF:** DJVU, DOCXF, OFORM, OXPS, PDF, XPS
-* **DIAGRAM:** VSDM, VSDX, VSSM, VSSX, VSTM, VSTX
-
-**For editing:**
-
-* **WORD:** DOCM, DOCX, DOTM, DOTX
-* **CELL:** XLSB, XLSM, XLSX, XLTM, XLTX
-* **SLIDE:** POTM, POTX, PPSM, PPSX, PPTM, PPTX
-* **PDF:** PDF
-
-**For editing with possible loss of information:**
-
-* **WORD:** EPUB, FB2, HTML, ODT, OTT, RTF, TXT
-* **CELL:** CSV, ODS, OTS
-* **SLIDE:** ODP, OTP
+## Requirements
+ - ONLYOFFICE Docs Atlassian Remote
+ - ONLYOFFICE Docs (Document Server)
 
 ## Installing ONLYOFFICE Docs
 
@@ -95,6 +79,64 @@ To grant the editing permission to a specific Jira role:
 ### Important to know ℹ️
 
 Due to certain constraints with the connector, the editor cannot remain open for extended periods. To ensure smooth functionality, it must be restarted every four hours.
+
+## Development
+
+1. Clone project from the GitHub repository:
+```
+git clone https://github.com/ONLYOFFICE/onlyoffice-jira-cloud
+```
+
+2. Install the project dependencies:
+```
+npm install
+```
+
+3. Install dependencies in Custom UI Project:
+```
+cd static/onlyoffice-jira-docs-forge-custom-ui
+npm install
+```
+
+4. Build Custom UI Project:
+```
+npm run build
+```
+
+5. Install the Forge CLI globally by running:
+```
+npm install -g @forge/cli
+```
+
+6. Log in to the Forge CLI ([Learn more](https://developer.atlassian.com/platform/forge/getting-started-learn/#log-in-with-an-atlassian-api-token)):
+```
+forge login
+```
+
+7. Specify environment variables in the manifest.yml file:
+```
+environment:
+  variables:
+    - key: FORGE_APP_ID
+      default: <YOUR_FORGE_APP_ID>
+    - key: FORGE_REMOTE_APP_URL
+      default: <YOUR_REMOTE_APP_URL>
+```
+
+8. Navigate to the app's top-level directory and deploy your app by running ([Learn more](https://developer.atlassian.com/platform/forge/build-a-hello-world-app-in-bitbucket/#install-your-app)):
+```
+forge deploy
+```
+
+9. Install your app by running:
+```
+forge install
+```
+
+10. You can start tunneling by running:
+```
+forge tunnel
+```
 
 ## ONLYOFFICE Docs editions
 
