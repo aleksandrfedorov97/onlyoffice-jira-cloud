@@ -1,6 +1,8 @@
 # ONLYOFFICE app for Jira Cloud
 
-This app enables users to edit office documents in [Jira Cloud](https://www.atlassian.com/software/jira/premium) using ONLYOFFICE Docs.
+This is an integration solution that allows Jira Cloud users to work with office documents directly from the Jira
+interface using ONLYOFFICE Docs editors. The project provides preview, editing, creation, and collaboration features
+for documents, presentations, and spreadsheets, as well as protection and security for file transfer and storage.
 
 ## Features
 * View and edit documents (DOCX, XLSX, PPTX, etc.), presentations, and spreadsheets directly in a Jira issue.
@@ -8,7 +10,11 @@ This app enables users to edit office documents in [Jira Cloud](https://www.atla
 * Create new files directly from Jira using ONLYOFFICE (new documents, tables, presentations).
 
 Supported formats:
-See [ONLYOFFICE Docs Atlassian Remote -> Supported Formats](https://github.com/ONLYOFFICE/onlyoffice-jira-cloud/remote?tab=readme-ov-file#supported-formats)
+See [ONLYOFFICE Docs Atlassian Remote -> Supported Formats](https://github.com/ONLYOFFICE/docs-atlassian-remote/remote?tab=readme-ov-file#supported-formats)
+
+## Requirements
+ - ONLYOFFICE Docs Atlassian Remote
+ - ONLYOFFICE Docs (Document Server)
 
 ## Installing ONLYOFFICE Docs
 
@@ -39,6 +45,64 @@ Administrators can configure ONLYOFFICE integration app via the Manage Apps sect
 
 ## Using ONLYOFFICE app for Jira
 With the ONLYOFFICE app, you can view, edit and co-author office files attached to tasks right within your Jira dashboard.
+
+## Development
+
+1. Clone project from the GitHub repository:
+```
+git clone https://github.com/ONLYOFFICE/onlyoffice-jira-cloud
+```
+
+2. Install the project dependencies:
+```
+npm install
+```
+
+3. Install dependencies in Custom UI Project:
+```
+cd static/onlyoffice-jira-docs-forge-custom-ui
+npm install
+```
+
+4. Build Custom UI Project:
+```
+npm run build
+```
+
+5. Install the Forge CLI globally by running:
+```
+npm install -g @forge/cli
+```
+
+6. Log in to the Forge CLI ([Learn more](https://developer.atlassian.com/platform/forge/getting-started-learn/#log-in-with-an-atlassian-api-token)):
+```
+forge login
+```
+
+7. Specify environment variables in the manifest.yml file:
+```
+environment:
+  variables:
+    - key: FORGE_APP_ID
+      default: <YOUR_FORGE_APP_ID>
+    - key: FORGE_REMOTE_APP_URL
+      default: <YOUR_REMOTE_APP_URL>
+```
+
+8. Navigate to the app's top-level directory and deploy your app by running ([Learn more](https://developer.atlassian.com/platform/forge/build-a-hello-world-app-in-bitbucket/#install-your-app)):
+```
+forge deploy
+```
+
+9. Install your app by running:
+```
+forge install
+```
+
+10. You can start tunneling by running:
+```
+forge tunnel
+```
 
 ## ONLYOFFICE Docs editions
 
