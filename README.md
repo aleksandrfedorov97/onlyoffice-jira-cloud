@@ -1,44 +1,100 @@
-# ONLYOFFICE app for Jira Cloud
+# ONLYOFFICE Connector for Jira Cloud
 
-This app enables users to edit office documents in [Jira Cloud](https://www.atlassian.com/software/jira/premium) using ONLYOFFICE Docs.
+This app allows users to create and edit office files in [Jira Cloud](https://www.atlassian.com/software/jira/premium) using ONLYOFFICE Docs.
 
-## Features
-* View and edit documents (DOCX, XLSX, PPTX, etc.), presentations, and spreadsheets directly in a Jira issue.
-* Co-edit documents in real-time: use two co-editing modes (Fast and Strict), Track Changes, comments, and built-in chat.
-* Create new files directly from Jira using ONLYOFFICE (new documents, tables, presentations).
+## Features ⭐️
 
-Supported formats:
-See [ONLYOFFICE Docs Atlassian Remote -> Supported Formats](https://github.com/ONLYOFFICE/onlyoffice-jira-cloud/remote?tab=readme-ov-file#supported-formats)
+* View and edit documents, spreadsheets, PDFs, and presentations directly in Jira issues.
+* Co-edit documents in real time: two co-editing modes (Fast and Strict), Track Changes, comments, built-in chat.
+* Create new files directly from Jira Cloud.
+
+### Supported formats
+
+**For viewing:**
+
+* **WORD:** DOC, DOCM, DOCX, DOT, DOTM, DOTX, EPUB, FB2, FODT, HTM, HTML, HWP, HWPX, MD, MHT, MHTML, ODT, OTT, PAGES, RTF, STW, SXW, TXT, WPS, WPT, XML
+* **CELL:** CSV, ET, ETT, FODS, NUMBERS, ODS, OTS, SXC, XLS, XLSM, XLSX, XLT, XLTM, XLTX
+* **SLIDE:** DPS, DPT, FODP, KEY, ODG, ODP, OTP, POT, POTM, POTX, PPS, PPSM, PPSX, PPT, PPTM, PPTX, SXI
+* **PDF:** DJVU, DOCXF, OFORM, OXPS, PDF, XPS
+* **DIAGRAM:** VSDM, VSDX, VSSM, VSSX, VSTM, VSTX
+
+**For editing:**
+
+* **WORD:** DOCM, DOCX, DOTM, DOTX
+* **CELL:** XLSB, XLSM, XLSX, XLTM, XLTX
+* **SLIDE:** POTM, POTX, PPSM, PPSX, PPTM, PPTX
+* **PDF:** PDF
+
+**For editing with possible loss of information:**
+
+* **WORD:** EPUB, FB2, HTML, ODT, OTT, RTF, TXT
+* **CELL:** CSV, ODS, OTS
+* **SLIDE:** ODP, OTP
 
 ## Installing ONLYOFFICE Docs
 
-You will need an instance of ONLYOFFICE Docs (Document Server) that is resolvable and connectable both from Jira and any end clients. ONLYOFFICE Document Server must also be able to POST to Jira directly.
+To be able to work with office files within Jira Cloud, you will need an instance of [ONLYOFFICE Docs](https://www.onlyoffice.com/office-suite.aspx). You can install the self-hosted version of the editors or opt for ONLYOFFICE Docs Cloud which doesn't require downloading and installation.
 
-You can install free Community version of ONLYOFFICE Docs or scalable Enterprise Edition with pro features.
+### Self-hosted editors
 
-To install free Community version, use [Docker](https://github.com/onlyoffice/Docker-DocumentServer) (recommended) or follow [these instructions](https://helpcenter.onlyoffice.com/installation/docs-community-install-ubuntu.aspx) for Debian, Ubuntu, or derivatives.
+You can install free Community version of ONLYOFFICE Docs or scalable Enterprise Edition.
 
-To install Enterprise Edition, follow the instructions [here](https://helpcenter.onlyoffice.com/installation/docs-enterprise-index.aspx).
+To install free Community version, use [Docker](https://github.com/onlyoffice/Docker-DocumentServer) (recommended) or follow [these instructions](https://helpcenter.onlyoffice.com/docs/installation/docs-community-install-ubuntu.aspx) for Debian, Ubuntu, or derivatives.
+
+To install Enterprise Edition, follow the instructions [here](https://helpcenter.onlyoffice.com/docs/installation/enterprise).
 
 Community Edition vs Enterprise Edition comparison can be found [here](#onlyoffice-docs-editions).
 
-## Installing ONLYOFFICE app for Jira Cloud
+### ONLYOFFICE Docs Cloud
+
+To get ONLYOFFICE Docs Cloud, get started [here](https://www.onlyoffice.com/docs-registration.aspx).
+
+## App installation 📥
+
 1. Go to [marketplace.atlassian.com](http://marketplace.atlassian.com/).
-2. Сhose the ONLYOFFICE app for Jira Cloud and select the Get it now button.
-3. On the pop-up screen, choose a site to install your app, and which edition to install, if the app offers multiple
-4. editions.
+2. Сhoose the ONLYOFFICE Connector for Jira and click the **Get it now** button.
+3. In the pop-up window, select the site where you'd like to install your app and choose the edition you prefer, if multiple editions are available.
 
-##  Configuring the integration app
-Administrators can configure ONLYOFFICE integration app via the Manage Apps section in Jira Cloud (Apps -> Connected apps -> ONLYOFFICE app for Jira Cloud -> Configure). On the configuration page, set up:
+## App configuration ⚙️
 
-* **ONLYOFFICE Docs address**: The URL of the installed ONLYOFFICE Document Server.
+Administrators can configure the ONLYOFFICE app via the Manage Apps section in Jira Cloud (Apps -> Manage apps -> Take me there -> ONLYOFFICE Connector for Jira -> Configure). On the configuration page, set up:
 
-* **ONLYOFFICE Docs secret key**: Enables JWT to protect your documents from unauthorized access (further information can be found here).
+* **ONLYOFFICE Docs address**: The URL of the installed ONLYOFFICE Docs.
+
+* **ONLYOFFICE Docs secret key**: Enables JWT to protect your documents from unauthorized access (further information can be found [here](https://helpcenter.onlyoffice.com/docs/installation/docs-configure-jwt.aspx)).
 
 * **Authorization header**.
 
-## Using ONLYOFFICE app for Jira
-With the ONLYOFFICE app, you can view, edit and co-author office files attached to tasks right within your Jira dashboard.
+You can also connect to the public test server of ONLYOFFICE Docs for one month by checking the corresponding box.
+
+## App usage
+
+The Jira issue page includes an ONLYOFFICE Docs section, allowing users to create new files or edit previously uploaded ones seamlessly. If you don’t see this section, simply click the gear icon below the issue title and select ONLYOFFICE Docs to enable it.
+
+### Creating files 📄
+
+To create a new file, click the **Create with ONLYOFFICE** button. In the pop-up window, enter a file name and choose a file format. Currently, you can create files in the following formats: DOCX, XLSX, and PPTX.
+
+Once you click Create, the file will be generated and instantly open in a pop-up window with editing permissions. The newly created file will also be added to the Attachments section for easy access.
+
+### Editing existing files 📝
+
+You can open any previously uploaded or created files in the ONLYOFFICE editors. Simply click the pencil icon to edit or the eye icon to view the file. The editor will launch accordingly.
+
+### File access permissions 👥
+
+* Downloading: Available to all users with access to the Jira issue.
+* Viewing: Available to all users with access to the Jira issue.
+* Editing: Users can edit files they have created. To edit files created by others, users must have the Delete All Attachments permission.
+
+To grant the editing permission to a specific Jira role:
+
+* Open the context menu for the desired project and select Project settings.
+* Navigate to the Permissions section, click the Action button, and update the role list for Delete All Attachments.
+
+### Important to know ℹ️
+
+Due to certain constraints with the connector, the editor cannot remain open for extended periods. To ensure smooth functionality, it must be restarted every four hours.
 
 ## ONLYOFFICE Docs editions
 
@@ -46,21 +102,21 @@ ONLYOFFICE offers different versions of its online document editors that can be 
 
 **ONLYOFFICE Docs** packaged as Document Server:
 
-* Community Edition (`onlyoffice-documentserver` package)
-* Enterprise Edition (`onlyoffice-documentserver-ee` package)
+* Community Edition 🆓 (`onlyoffice-documentserver` package) – Perfect for small teams and personal use.
+* Enterprise Edition 🏢 (`onlyoffice-documentserver-ee` package) – Designed for businesses with advanced features & support.
 
 The table below will help you make the right choice.
 
 | Pricing and licensing | Community Edition | Enterprise Edition |
 | ------------- | ------------- | ------------- |
-| | [Get it now](https://www.onlyoffice.com/download-docs.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubConfluenceCloud#docs-community)  | [Start Free Trial](https://www.onlyoffice.com/download-docs.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubConfluenceCloud#docs-enterprise)  |
-| Cost  | FREE  | [Go to the pricing page](https://www.onlyoffice.com/docs-enterprise-prices.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubConfluenceCloud)  |
+| | [Get it now](https://www.onlyoffice.com/download-community.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubJiraCloud#docs-community)  | [Start Free Trial](https://www.onlyoffice.com/download.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubJiraCloud#docs-enterprise)  |
+| Cost  | FREE  | [Go to the pricing page](https://www.onlyoffice.com/docs-enterprise-prices.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubJiraCloud)  |
 | Simultaneous connections | up to 20 maximum  | As in chosen pricing plan |
 | Number of users | up to 20 recommended | As in chosen pricing plan |
 | License | GNU AGPL v.3 | Proprietary |
 | **Support** | **Community Edition** | **Enterprise Edition** |
-| Documentation | [Help Center](https://helpcenter.onlyoffice.com/installation/docs-community-index.aspx) | [Help Center](https://helpcenter.onlyoffice.com/installation/docs-enterprise-index.aspx) |
-| Standard support | [GitHub](https://github.com/ONLYOFFICE/DocumentServer/issues) or paid | One year support included |
+| Documentation | [Help Center](https://helpcenter.onlyoffice.com/docs/installation/community) | [Help Center](https://helpcenter.onlyoffice.com/docs/installation/enterprise) |
+| Standard support | [GitHub](https://github.com/ONLYOFFICE/DocumentServer/issues) or paid | One or three years support included |
 | Premium support | [Contact us](mailto:sales@onlyoffice.com) | [Contact us](mailto:sales@onlyoffice.com) |
 | **Services** | **Community Edition** | **Enterprise Edition** |
 | Conversion Service                | + | + |
@@ -109,17 +165,23 @@ The table below will help you make the right choice.
 | Animations                      | + | + |
 | Presenter mode                  | + | + |
 | Notes                           | + | + |
+| Slide Master	                  | + | + |
 | **Form creator features** | **Community Edition** | **Enterprise Edition** |
 | Adding form fields           | + | + |
 | Form preview                    | + | + |
 | Saving as PDF                   | + | + |
-| **Working with PDF**      | **Community Edition** | **Enterprise Edition** |
+| **PDF Editor features**      | **Community Edition** | **Enterprise Edition** |
+| Text editing and co-editing	  | + | + |
+| Work with pages (adding, deleting, rotating) | + | + |
+| Inserting objects (shapes, images, hyperlinks, etc.) | + | + |
 | Text annotations (highlight, underline, cross out) | + | + |
 | Comments                        | + | + |
 | Freehand drawings               | + | + |
 | Form filling                    | + | + |
-| | [Get it now](https://www.onlyoffice.com/download-docs.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubConfluenceCloud#docs-community)  | [Start Free Trial](https://www.onlyoffice.com/download-docs.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubConfluenceCloud#docs-enterprise)  |
+| | [Get it now](https://www.onlyoffice.com/download-community.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubJiraCloud#docs-community)  | [Start Free Trial](https://www.onlyoffice.com/download.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubJiraCloud#docs-enterprise)  |
 
 \* If supported by DMS.
 
-In case of technical problems, the best way to get help is to submit your issues [here](https://github.com/ONLYOFFICE/onlyoffice-confluence-cloud/issues). Alternatively, you can contact ONLYOFFICE team on [forum.onlyoffice.com](https://forum.onlyoffice.com/).
+## Need help? Feedback & Support 💡
+
+In case of technical problems, the best way to get help is to submit your issues [here](https://github.com/ONLYOFFICE/onlyoffice-jira-cloud/issues). Alternatively, you can contact ONLYOFFICE team via [community.onlyoffice.com](https://community.onlyoffice.com) or [feedback.onlyoffice.com](https://feedback.onlyoffice.com/forums/966080-your-voice-matters).
