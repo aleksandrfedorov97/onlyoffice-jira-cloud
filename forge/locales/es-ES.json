@@ -57,7 +57,15 @@
       "title": "Crear con ONLYOFFICE",
       "fields": {
         "title": "Título",
-        "document-type": "Tipo de documento",
+        "document-type": {
+          "title": "Tipo de documento",
+          "options": {
+            "word": "Documento",
+            "cell": "Hoja de cálculo",
+            "slide": "Presentación",
+            "pdf": "Formulario PDF"
+          }
+        },
         "new-document": "Nuevo documento"
       },
       "messages": {

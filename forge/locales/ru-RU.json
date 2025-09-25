@@ -57,7 +57,15 @@
       "title": "Создать с помощью ONLYOFFICE",
       "fields": {
         "title": "Заголовок",
-        "document-type": "Тип документа",
+        "document-type": {
+          "title": "Тип документа",
+          "options": {
+            "word": "Документ",
+            "cell": "Таблица",
+            "slide": "Презентация",
+            "pdf": "PDF-форма"
+          }
+        },
         "new-document": "Новый документ"
       },
       "messages": {

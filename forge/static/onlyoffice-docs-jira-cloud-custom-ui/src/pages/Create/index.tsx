@@ -36,12 +36,7 @@ import { Attachment } from "../../../src/types/types";
 import { AppContext } from "../../context/AppContext";
 
 const forbiddenChars = /[\\/:*?"<>|]/;
-
-const documentTypeOptions = [
-  { label: "Document", value: "word" },
-  { label: "Spreadsheet", value: "cell" },
-  { label: "Presentation", value: "slide" },
-];
+const documentTypeOptions = ["word", "cell", "slide"];
 
 export type CreatePageProps = {
   context: FullContext;
@@ -133,10 +128,16 @@ const CreatePage: React.FC<CreatePageProps> = ({ context }) => {
               </Field>
 
               <Field<ValueType<OptionType>>
-                label={t("page.create.fields.document-type")}
+                label={t("page.create.fields.document-type.title")}
                 name="type"
                 id="type"
-                defaultValue={documentTypeOptions[0]}
+                defaultValue={{
+                  label: t(
+                    "page.create.fields.document-type.options." +
+                      documentTypeOptions[0],
+                  ),
+                  value: documentTypeOptions[0],
+                }}
                 isRequired
                 isDisabled={submitting}
               >
@@ -144,7 +145,12 @@ const CreatePage: React.FC<CreatePageProps> = ({ context }) => {
                   <Select
                     id={`${id}-select`}
                     isSearchable={false}
-                    options={documentTypeOptions}
+                    options={documentTypeOptions.map((type) => ({
+                      label: t(
+                        "page.create.fields.document-type.options." + type,
+                      ),
+                      value: type,
+                    }))}
                     {...rest}
                   />
                 )}

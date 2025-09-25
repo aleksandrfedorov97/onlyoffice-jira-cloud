@@ -57,7 +57,15 @@
       "title": "Mit ONLYOFFICE erstellen",
       "fields": {
         "title": "Titel",
-        "document-type": "Dokumenttyp",
+        "document-type": {
+          "title": "Dokumenttyp",
+          "options": {
+            "word": "Dokument",
+            "cell": "Tabelle",
+            "slide": "Präsentation",
+            "pdf": "PDF-Formular"
+          }
+        },
         "new-document": "Neues Dokument"
       },
       "messages": {
