@@ -36,7 +36,7 @@ import { Attachment } from "../../../src/types/types";
 import { AppContext } from "../../context/AppContext";
 
 const forbiddenChars = /[\\/:*?"<>|]/;
-const documentTypeOptions = ["word", "cell", "slide"];
+const documentTypeOptions = ["word", "cell", "slide", "pdf"];
 
 export type CreatePageProps = {
   context: FullContext;
