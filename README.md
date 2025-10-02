@@ -1,4 +1,4 @@
-# ONLYOFFICE Connector for Jira Cloud
+# ONLYOFFICE app for Jira Cloud
 
 This app allows users to create and edit office files in [Jira Cloud](https://www.atlassian.com/software/jira/premium) using ONLYOFFICE Docs.
 
@@ -8,8 +8,28 @@ This app allows users to create and edit office files in [Jira Cloud](https://ww
 * Co-edit documents in real time: two co-editing modes (Fast and Strict), Track Changes, comments, built-in chat.
 * Create new files directly from Jira Cloud.
 
-Supported formats:
-See [ONLYOFFICE Docs Atlassian Remote -> Supported Formats](https://github.com/ONLYOFFICE/docs-atlassian-remote/remote?tab=readme-ov-file#supported-formats)
+### Supported formats
+
+**For viewing:**
+
+* **WORD:** DOC, DOCM, DOCX, DOT, DOTM, DOTX, EPUB, FB2, FODT, HTM, HTML, HWP, HWPX, MD, MHT, MHTML, ODT, OTT, PAGES, RTF, STW, SXW, TXT, WPS, WPT, XML
+* **CELL:** CSV, ET, ETT, FODS, NUMBERS, ODS, OTS, SXC, XLS, XLSM, XLSX, XLT, XLTM, XLTX
+* **SLIDE:** DPS, DPT, FODP, KEY, ODG, ODP, OTP, POT, POTM, POTX, PPS, PPSM, PPSX, PPT, PPTM, PPTX, SXI
+* **PDF:** DJVU, DOCXF, OFORM, OXPS, PDF, XPS
+* **DIAGRAM:** VSDM, VSDX, VSSM, VSSX, VSTM, VSTX
+
+**For editing:**
+
+* **WORD:** DOCM, DOCX, DOTM, DOTX
+* **CELL:** XLSB, XLSM, XLSX, XLTM, XLTX
+* **SLIDE:** POTM, POTX, PPSM, PPSX, PPTM, PPTX
+* **PDF:** PDF
+
+**For editing with possible loss of information:**
+
+* **WORD:** EPUB, FB2, HTML, ODT, OTT, RTF, TXT
+* **CELL:** CSV, ODS, OTS
+* **SLIDE:** ODP, OTP
 
 ## Requirements
  - ONLYOFFICE Docs Atlassian Remote
