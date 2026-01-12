@@ -32,26 +32,40 @@ settingsPageResolver.define("getSettings", async () => {
   settings["demoStart"] = remoteSettings.demoStart;
   settings["demoEnd"] = remoteSettings.demoEnd;
 
+  if (!settings["demoStart"]) {
+    settings["demo"] = false;
+  }
+
   return settings;
 });
 
 settingsPageResolver.define("saveSettings", async (request: Request) => {
   const { payload } = request;
 
-  const settings =
-    (await saveSettings({
-      url: payload["url"] || "",
-      "security.key": payload["security.key"] || "",
-      "security.header": payload["security.header"] || "",
-      demo: payload["demo"] || false,
-    })) || {};
+  let settings = {
+    url: payload["url"] || "",
+    "security.key": payload["security.key"] || "",
+    "security.header": payload["security.header"] || "",
+    demo: payload["demo"] || false,
+  } as Record<string, any>;
 
   let remoteSettings;
-  if (settings["demo"]) {
-    remoteSettings = await postRemoteSettings();
-  } else {
+  if (!payload["demo"]) {
     remoteSettings = await getRemoteSettings();
+  } else {
+    remoteSettings = await postRemoteSettings();
+
+    if (remoteSettings.demoAvailable) {
+      const currentSettings = (await getSettings()) || {};
+
+      settings = {
+        ...currentSettings,
+        demo: true,
+      };
+    }
   }
+
+  settings = (await saveSettings(settings)) || {};
 
   settings["demoAvailable"] = remoteSettings.demoAvailable;
   settings["demoStart"] = remoteSettings.demoStart;

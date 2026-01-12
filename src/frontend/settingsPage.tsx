@@ -132,9 +132,6 @@ const SettingsPage = () => {
     }
 
     let newSettings = { ...localSettings };
-    if (newSettings["demo"]) {
-      newSettings = { ...settings, demo: true };
-    }
 
     setSubmitting(true);
 
