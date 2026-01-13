@@ -23,13 +23,12 @@ import DownloadIcon from "@atlaskit/icon/core/download";
 import EditIcon from "@atlaskit/icon/core/edit";
 import EyeOpenIcon from "@atlaskit/icon/core/eye-open";
 import { Box, Text, xcss } from "@atlaskit/primitives";
-import { Modal, events, invoke } from "@forge/bridge";
+import { Modal, events, invoke, router } from "@forge/bridge";
 import { FullContext } from "@forge/bridge/out/types";
 
 import { AttachmentsList } from "../../../src/components/AttachmentsList";
 import { Attachment, Format, Permission } from "../../../src/types/types";
 import { useFormats } from "../../../src/util/formats";
-import { downloadUrl } from "../../../src/util/ui";
 import { ReactComponent as CellIcon } from "../../assets/images/cell.svg";
 import { ReactComponent as DiagramIcon } from "../../assets/images/diagram.svg";
 import { ReactComponent as OnlyofficeButtonIcon } from "../../assets/images/onlyoffice-button.svg";
@@ -145,7 +144,7 @@ const MainPage: React.FC<EditorPageProps> = ({ context }) => {
   const download = (attachmentId: string) => {
     invoke<string>("getAttachmentContentUrl", { attachmentId }).then(
       (attachmentContentUrl: string) => {
-        downloadUrl(attachmentContentUrl);
+        router.open(attachmentContentUrl);
       },
     );
   };
