@@ -92,6 +92,9 @@
     "cancel": {
       "title": "Cancel"
     },
+    "close": {
+      "title": "Close"
+    },
     "save": {
       "title": "Save"
     },

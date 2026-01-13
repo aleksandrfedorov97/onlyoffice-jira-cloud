@@ -92,6 +92,9 @@
     "cancel": {
       "title": "Annuler"
     },
+    "close": {
+      "title": "Fermer"
+    },
     "save": {
       "title": "Enregistrer"
     },
