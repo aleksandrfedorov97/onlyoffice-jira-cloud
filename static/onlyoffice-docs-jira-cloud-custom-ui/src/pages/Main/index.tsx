@@ -192,17 +192,19 @@ const MainPage: React.FC<EditorPageProps> = ({ context }) => {
 
   return (
     <>
-      {permissions?.["CREATE_ATTACHMENTS"].havePermission && (
-        <Box xcss={styles.buttonContainer}>
-          <Button
-            title={t("buttons.create-in-app.title")}
-            iconBefore={OnlyofficeButtonIcon}
-            onClick={createNewDocument}
-          >
-            {t("buttons.create-in-app.title")}
-          </Button>
-        </Box>
-      )}
+      {permissions?.["CREATE_ATTACHMENTS"].havePermission &&
+        (permissions?.["DELETE_ALL_ATTACHMENTS"].havePermission ||
+          permissions?.["DELETE_OWN_ATTACHMENTS"].havePermission) && (
+          <Box xcss={styles.buttonContainer}>
+            <Button
+              title={t("buttons.create-in-app.title")}
+              iconBefore={OnlyofficeButtonIcon}
+              onClick={createNewDocument}
+            >
+              {t("buttons.create-in-app.title")}
+            </Button>
+          </Box>
+        )}
       <AttachmentsList
         attachments={attachments}
         isLoading={loading}
