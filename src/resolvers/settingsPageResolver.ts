@@ -47,7 +47,7 @@ settingsPageResolver.define("saveSettings", async (request: Request) => {
     "security.key": payload["security.key"] || "",
     "security.header": payload["security.header"] || "",
     demo: payload["demo"] || false,
-  } as Record<string, any>;
+  } as Record<string, string | number | boolean>;
 
   let remoteSettings;
   if (!payload["demo"]) {

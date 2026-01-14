@@ -131,7 +131,7 @@ const SettingsPage = () => {
       return;
     }
 
-    let newSettings = { ...localSettings };
+    const newSettings = { ...localSettings };
 
     setSubmitting(true);
 
